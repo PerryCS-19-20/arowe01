@@ -3,18 +3,25 @@
     <head>
         <title>Row, Row, Row Your Boat</title>
         <style>
-            h1 {
-                text-align: center;
-                color: blue;
-                font-size: 30 px;
-            }
             #name {
                 font-size: 20 px;
             }
-            div {
+            #wrap {
                 width: 500px;
                 margin: auto;
-                
+            }
+            #quote-and-color {
+                width: 600px;
+                margin: auto;
+            }
+            .box {
+                float: left;
+                width: 50%;
+            }
+            .quote-and-color {
+                width: 210px;
+                height: 210px;
+                margin: auto;
             }
             body {
                 text-align: center;
@@ -23,42 +30,57 @@
                 text-align: left;
             }
             #color {
-                width: 250px;
-                height: 250px;
                 background-color: BlanchedAlmond;
+                width: 210px;
+                height: 210px;
+                margin: auto;
+            }
+            #quote {
+                font-size: 21px;
+                font-style: italic;
+                font-family: Courier New;
             }
         </style>
     </head>
     <body>
         <br>
         <br>
-        <div>put an image here
-        <h1 id="name">Alyssa Rowe</h1>
-        <p id="description">
-            I am 15, and a Sophmore at Perrhy Highschool. My hobbies include eating, sleeping, wasting my time, 
-            drawing, watching cartoons, and making them dank memes. I have an interest in art, design, and computers, 
-            and hope to someday get a career in animation (I plan to suffer, basically). I got interested in 
-            computer programming when I was in 8th grade, and was in a not-so-great-robotics class. We hardly wrote any 
-            code in that class, but I was immediately interested. Before that point I was only mildly interested in the subject.
-            In this class, I plan to learn as much as I can about JavaScript and HTML, since those two languages seem to be the 
-            most useful in today's age. Although, it would be fun to learn as many languages as I can.
-        </p>
-        <a href="https://codehs.com/editor/html/153958/274683/index.html">Favorite link</a>
-        <a href="">Gallery</a>
-        <br>
-        <br>
-        <hr>
-        <h2>Quote of the Week</h2>
-        <p>
-        <h3>"I want to sleep forever, but not in the dead way"</h3>
-        <h5>-My friend from Boston</h5>
-        </p>
-      <hr>
-        <p>
-    <h2>Color of the Week</h2>
-    <div id="color"></div>
-    <h3>BlanchedAlmond</h3>
-        </p>
+        <div id="column">
+            <div id="wrap">put an image here
+                <h1 id="name">Alyssa Rowe</h1>
+                <p id="description">
+                    I am 15, and a Sophmore at Perrhy Highschool. My hobbies include eating, sleeping, wasting my time, 
+                    drawing, watching cartoons, and making them dank memes. I have an interest in art, design, and computers, 
+                    and hope to someday get a career in animation (I plan to suffer, basically). I got interested in 
+                    computer programming when I was in 8th grade, and was in a not-so-great-robotics class. We hardly wrote any 
+                    code in that class, but I was immediately interested. Before that point I was only mildly interested in the subject.
+                    In this class, I plan to learn as much as I can about JavaScript and HTML, since those two languages seem to be the 
+                    most useful in today's age. Although, it would be fun to learn as many languages as I can.
+                </p>
+                <a href="https://codehs.com/editor/html/153958/274683/index.html">Favorite link</a>
+                <a href="">Gallery</a>
+                <br>
+                <br>
+                <hr>
+    
+            </div>
+            <div id="quote-and-color">
+                <div class="box">
+                    <h2>Quote of the Week</h2>
+                    <p>
+                    <div class="quote-and-color">
+                        <h3 id="quote">"I want to sleep forever, but not in the dead way"</h3>
+                        <h5>-My friend from Boston</h5>
+                    </div>    
+                </div>
+                <div class="box">
+                    <p>
+                        <h2>Color of the Week</h2>
+                            <div id="color"></div>
+                            <h3>BlanchedAlmond</h3>
+                    </p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
