@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Breakout</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="https://static.codehs.com/gulp/cb01b4a22ffd3971572a8a1ab9f3b7c4cb17f383/chs-js-lib/chs.js"></script>
+		<script>
+            window.onload = function() {
+                //BREAKOUT
+                
+                /* Constants for bricks */
+var NUM_ROWS = 8;
+var BRICK_TOP_OFFSET = 10;
+var BRICK_SPACING = 2;
+var NUM_BRICKS_PER_ROW = 10;
+var BRICK_HEIGHT = 10;
+var SPACE_FOR_BRICKS = getWidth() - (NUM_BRICKS_PER_ROW + 1) * BRICK_SPACING;
+var BRICK_WIDTH = SPACE_FOR_BRICKS / NUM_BRICKS_PER_ROW;
+
+/* Constants for ball and paddle */
+var PADDLE_WIDTH = 80;
+var PADDLE_HEIGHT = 15;
+var PADDLE_OFFSET = 10;
+var paddle;
+var msg;
+
+var BALL_RADIUS = 15;
+var ball;
+var dx = 2;
+var dy = 2;
+
+var colorCheck = 1;
+var retryCounter = 0;
+
+/*This function builds a wall made up of multicolored bricks, along with a paddle that follows
+your mouse, and a ball that bounces from wall to wall. */
+function start(){
+	makeBricks();
+	
+	paddle = new Rectangle(PADDLE_WIDTH, PADDLE_HEIGHT);
+	paddle.setPosition((getWidth() - PADDLE_WIDTH) /2,
+	                  getHeight() - PADDLE_HEIGHT - PADDLE_OFFSET);
+	add(paddle);
+	mouseMoveMethod(movePaddle);
+	
+	ball = new Circle(BALL_RADIUS);
+    ball.setPosition(getWidth() /2, getHeight() /2);
+    add(ball);
+    setTimer(moveBall, 1);
+    
+//    gameMessage("H eey");
+    
+    
+}
+
+//ball moves across screen
+function moveBall(){
+    ball.move(dx, dy);
+    
+    bounce();
+    
+    collision();
+}
+
+function redo(e){
+    stopTimer(moveBall);
+    setTimer(moveBall, 1);
+    msg.setPosition(getWidth(), getHeight());
+    mouseDownMethod(null);
+    retryCounter++;
+    }
+
+function collision(){
+    //bottom of the screen
+    if(ball.getY() + BALL_RADIUS > getHeight()){
+        stopTimer(moveBall);
+        ball.setPosition(getWidth() /2, getHeight() /2);
+        
+       if(retryCounter >= 3){
+            gameMessage("Game Over");
+        }
+        if(retryCounter < 3){ 
+            gameMessage("Continue?");
+            mouseDownMethod(redo);
+        }
+    }
+    //brick
+    var isThereBrick = getElementAt(ball.getX(), ball.getY() - BALL_RADIUS);
+    if(isThereBrick != null){
+        isThereBrick.setPosition(getWidth(), getHeight());
+        dy= -dy;
+    }
+}
+
+//paddle will move centered underneath your cursor. it will stop moving if it hits a wall
+function movePaddle(e){
+    if(e.getX() <= PADDLE_WIDTH /2){
+        paddle.setPosition(PADDLE_WIDTH /2 - PADDLE_WIDTH /2, getHeight() - PADDLE_HEIGHT - PADDLE_OFFSET);
+    }else if(e.getX() >= getWidth() - PADDLE_WIDTH /2){
+        paddle.setPosition(getWidth() - PADDLE_WIDTH /2 - PADDLE_WIDTH /2, getHeight() - PADDLE_HEIGHT - PADDLE_OFFSET);
+    }else{
+        paddle.setPosition(e.getX() - PADDLE_WIDTH /2, getHeight() - PADDLE_HEIGHT - PADDLE_OFFSET);
+    }
+}
+
+function makeBricks(){
+    for(var i = 1; i < NUM_ROWS; i = i + 2){
+        //change color
+        if(colorCheck == 1){
+            var color = Color.red;
+        }else if(colorCheck == 2){
+            var color = Color.orange;
+        }else if(colorCheck == 3){
+            var color = Color.green;
+        }else{
+            var color = Color.blue;
+        }
+        
+        //reset color pattern
+        colorCheck++;
+        if(colorCheck > 4){
+            colorCheck = 1;
+        }
+        
+        //add two rows of bricks of the same color
+        newRow(i, color);
+        newRow(i+1, color);
+    }
+}
+
+//add a single row a bricks of only one color
+function newRow(row, color){
+    for(var i = 0; i < NUM_BRICKS_PER_ROW; i++){
+        newBrick(BRICK_SPACING + (i *(BRICK_SPACING + BRICK_WIDTH)), BRICK_TOP_OFFSET + ((row - 1) *(BRICK_TOP_OFFSET + BRICK_SPACING)), color);
+    } 
+}
+
+//add a single brick
+function newBrick(x, y, color){
+    var brick = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
+    brick.setPosition(x, y);
+    brick.setColor(color);
+    add(brick);
+}
+
+//ball will bounce and move in the opposite direction if it hits a wall
+function bounce(){
+    //right wall OR left wall
+    if(ball.getX() + BALL_RADIUS > getWidth() || ball.getX() - BALL_RADIUS < 0){
+        dx = -dx;
+    }
+    //top wall
+    if(ball.getY() - BALL_RADIUS < 0){
+        dy = -dy;
+    }
+    //top of paddle
+    if(ball.getY() + BALL_RADIUS > paddle.getY()
+      && paddle.getX() < ball.getX() && ball.getX() < paddle.getX() + PADDLE_WIDTH){
+        dy= -dy;
+    }
+    //side of paddle
+    if(ball.getY() + BALL_RADIUS > paddle.getY() && ball.getY() - BALL_RADIUS < paddle.getY() + PADDLE_HEIGHT
+      && paddle.getX() +2 > ball.getX() + BALL_RADIUS && ball.getX() + BALL_RADIUS > paddle.getX()
+      || paddle.getX() + PADDLE_WIDTH + 2 < ball.getX() - BALL_RADIUS && ball.getX() - BALL_RADIUS < paddle.getX() + PADDLE_WIDTH){
+          dx = -dx;
+      }
+}
+
+function gameMessage(say){
+    msg = new Text(say, "30pt Comic Sans MS");
+    msg.setPosition(getWidth() /2 - msg.getWidth() /2, getHeight() /2 -100);
+    var color = Randomizer.nextInt(1,4);
+    if(color == 1){
+            var txtColor = Color.red;
+        }else if(color == 2){
+            var txtColor = Color.orange;
+        }else if(color == 3){
+            var txtColor = Color.green;
+        }else{
+            var txtColor = Color.blue;
+        }
+    msg.setColor(txtColor);
+    add(msg);
+}
+
+
+                if(typeof start === 'function'){
+                    start();
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <div id="canvasContainer" width="100%" style="width: 100%; height: 100%; overflow: hidden;">
+            <canvas width="400" height="500" class="codehs-editor-canvas"></canvas>
+        </div>
+        <form action="https://perryma.tk/arowe01/index.html" method="get">
+                    <input type="submit" value="Go Back">
+    </body>
+</html>
