@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Row, Row, Row Your Boat</title>
+        
+    </head>
+    <body>
+        <h1>To Do List</h1>
+        <textarea rows="5" cols="60" id="inputText"></textarea>
+        <button onclick="addText();">Add to List</button>
+        <hr>
+        <ul id="list"></ul>
+        <script>
+            function addText() {
+                var userInput = document.getElementById("inputText");
+                var toDo = document.getElementById("list");
+                
+                var item = document.createElement("li");
+                item.textContent = userInput.value;
+                toDo.appendChild(item);
+                
+                
+            }
+        </script>
+    </body>
+</html>
