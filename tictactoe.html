@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <style>
+        td {
+            width: 100px;
+            height: 100px;
+            border: solid 1px;
+            font-size: 80px;
+            text-align: center;
+            
+        }
+    </style>
+    <body>
+        <h1>Tic-Tac-Toe</h1>
+        <table>
+            <tr>
+                <td id="1" onclick="play('1');"></td>
+                <td id="2" onclick="play('2');"></td>
+                <td id="3" onclick="play('3');"></td>
+            </tr>
+            <tr>
+                <td id="4" onclick="play('4');"></td>
+                <td id="5" onclick="play('5');"></td>
+                <td id="6" onclick="play('6');"></td>
+            </tr>
+            <tr>
+                <td id="7" onclick="play('7');"></td>
+                <td id="8" onclick="play('8');"></td>
+                <td id="9" onclick="play('9');"></td>
+            </tr>
+        </table>
+        <span id="move">X's move</span>
+        <br>
+        <h2 id="winner"></h2>
+        
+        <script>
+                var player = "X";
+                var turn = document.getElementById("move");
+                var win = document.getElementById("winner");
+                var winner = false;
+                
+                function play(id) {
+                    var cell = document.getElementById(id);
+                    if(winner == false){
+                        if(cell.textContent == ""){
+                            cell.textContent = player;
+                            checkWinner();
+                            if(player == "X"){
+                                player = "O";
+                            }else{
+                                player = "X";
+                            }
+                            turn.textContent = player + "'s move";
+                        }
+                    }
+                }
+                
+                function checkWinner() {
+                    var one = document.getElementById("1");
+                    var two = document.getElementById("2");
+                    var three = document.getElementById("3");
+                    var four = document.getElementById("4");
+                    var five = document.getElementById("5");
+                    var six = document.getElementById("6");
+                    var seven = document.getElementById("7");
+                    var eight = document.getElementById("8");
+                    var nine = document.getElementById("9");
+                    
+                    if(one.textContent == player && two.textContent == player
+                       && three.textContent == player) {
+                        winningColors(1, 2, 3);
+                    }
+                    if(four.textContent == player && five.textContent == player
+                       && six.textContent == player) {
+                        winningColors(4, 5, 6);
+                    }
+                    if(seven.textContent == player && eight.textContent == player
+                       && nine.textContent == player) {
+                        winningColors(7, 8, 9);
+                    }
+                    if(one.textContent == player && four.textContent == player
+                       && seven.textContent == player) {
+                       winningColors(1, 4, 7);
+                    }
+                    if(two.textContent == player && five.textContent == player
+                       && eight.textContent == player) {
+                        winningColors(2, 5, 8);
+                    }
+                    if(three.textContent == player && six.textContent == player
+                       && nine.textContent == player) {
+                      winningColors(3, 6, 9);
+                    }
+                    if(one.textContent == player && five.textContent == player
+                       && nine.textContent == player) {
+                       winningColors(1, 5, 9);
+                    }
+                    if(three.textContent == player && five.textContent == player
+                       && seven.textContent == player) {
+                       winningColors(3, 5, 7);
+                    }
+                }
+                
+                function winningColors(one, two, three) {
+                    winner = true;
+                    win.textContent = player + " won!";
+                    
+                    var first = document.getElementById(one);
+                    var second = document.getElementById(two);
+                    var third = document.getElementById(three);
+                    
+                    first.style.color = "red";
+                    second.style.color = "red";
+                    third.style.color = "red"; 
+                }
+            </script>
+    </body>
+</html>
