@@ -13,29 +13,51 @@
             text-align: center;
             
         }
+        h1 {
+            font-size: 70px;
+        }
+        #tictactoe {
+            width: 500px;
+            margin: auto;
+            text-align: center;
+            
+        }
+        #board {
+            margin: auto;
+        }
+        #turn {
+            width: 50px;
+            padding: 30px;
+            margin: auto;
+            font-size: 20px;
+            border: solid 1px;
+        }
     </style>
     <body>
-        <h1>Tic-Tac-Toe</h1>
-        <table>
-            <tr>
-                <td id="1" onclick="play('1');"></td>
-                <td id="2" onclick="play('2');"></td>
-                <td id="3" onclick="play('3');"></td>
-            </tr>
-            <tr>
-                <td id="4" onclick="play('4');"></td>
-                <td id="5" onclick="play('5');"></td>
-                <td id="6" onclick="play('6');"></td>
-            </tr>
-            <tr>
-                <td id="7" onclick="play('7');"></td>
-                <td id="8" onclick="play('8');"></td>
-                <td id="9" onclick="play('9');"></td>
-            </tr>
-        </table>
-        <span id="move">X's move</span>
-        <br>
-        <h2 id="winner"></h2>
+        <div id="tictactoe">
+            <h1>Tic-Tac-Toe</h1>
+            <table id="board">
+                <tr>
+                    <td id="1" onclick="play('1');"></td>
+                    <td id="2" onclick="play('2');"></td>
+                    <td id="3" onclick="play('3');"></td>
+                </tr>
+                <tr>
+                    <td id="4" onclick="play('4');"></td>
+                    <td id="5" onclick="play('5');"></td>
+                    <td id="6" onclick="play('6');"></td>
+                </tr>
+                <tr>
+                    <td id="7" onclick="play('7');"></td>
+                    <td id="8" onclick="play('8');"></td>
+                    <td id="9" onclick="play('9');"></td>
+                </tr>
+            </table>
+            <div id="turn"><span id="move">X's move</span></div>
+            <br>
+            <h2 id="winner"></h2>
+        </div>
+        
         
         <script>
                 var player = "X";
@@ -102,10 +124,18 @@
                        && seven.textContent == player) {
                        winningColors(3, 5, 7);
                     }
+                    if(one.textContent != "" && two.textContent != "" 
+                            && three.textContent != "" && four.textContent != "" &&
+                            five.textContent != "" && six.textContent != "" && 
+                            seven.textContent != "" && eight.textContent != "" && nine.textContent != ""){
+                        win.textContent = "It's a Tie!";
+                            }
+                            
                 }
                 
                 function winningColors(one, two, three) {
                     winner = true;
+
                     win.textContent = player + " won!";
                     
                     var first = document.getElementById(one);
