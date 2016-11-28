@@ -24,6 +24,7 @@
         }
         #board {
             margin: auto;
+            font-family: "Geholiday";
         }
         #turn {
             width: 50px;
@@ -32,6 +33,11 @@
             font-size: 20px;
             border: solid 1px;
         }
+        @font-face {
+            font-family: "Geholiday";
+            src: url("https://perryma.tk/se/Geholiday.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
     </style>
     <body>
         <div id="tictactoe">
@@ -58,12 +64,18 @@
             <h2 id="winner"></h2>
         </div>
         
+        <script src="https://perryma.tk/se/holidays.js"></script>
         
         <script>
-                var player = "X";
+                var holiday = holiday();
+                var player;
+                var x = getLetter(1);
+                var o = getLetter(2);
+                var playerTurn = 1;
                 var turn = document.getElementById("move");
                 var win = document.getElementById("winner");
                 var winner = false;
+                
                 
                 function play(id) {
                     var cell = document.getElementById(id);
@@ -71,59 +83,125 @@
                         if(cell.textContent == ""){
                             cell.textContent = player;
                             checkWinner();
-                            if(player == "X"){
-                                player = "O";
+                            if(playerTurn == 1){
+                                player = x;
+                                playerTurn = 2;
                             }else{
-                                player = "X";
+                                player = o;
+                                playerTurn = 1;
                             }
                             turn.textContent = player + "'s move";
                         }
                     }
                 }
                 
-                function checkWinner() {
-                    var one = document.getElementById("1");
-                    var two = document.getElementById("2");
-                    var three = document.getElementById("3");
-                    var four = document.getElementById("4");
-                    var five = document.getElementById("5");
-                    var six = document.getElementById("6");
-                    var seven = document.getElementById("7");
-                    var eight = document.getElementById("8");
-                    var nine = document.getElementById("9");
+                var player1;
+                var player2;
+                function getLetter(playerNum){
                     
-                    if(one.textContent == player && two.textContent == player
-                       && three.textContent == player) {
-                        winningColors(1, 2, 3);
+                    if(holiday == null){
+                        if(playerNum == 1){
+                            return "X";
+                        }else if(playerNum == 2){
+                            return "O";
+                        }
+                    }else{
+                        checkHoliday("Thanksgiving", "n", "m", playerNum);
+                        checkHoliday("Christmas", "p", "o", playerNum);
+                        checkHoliday("Easter", "d", "e", playerNum);
+                        checkHoliday("Valentines", "c", "a", playerNum);
+                        checkHoliday("Halloween", "j", "i", playerNum);
+                        checkHoliday("4th of July", "g", "h", playerNum);
+                    }  
+                }
+                
+                function checkHoliday(holidayName, xLetter, oLetter, playerNum){
+                    if(holiday == holidayName){
+                        if(playerNum == 1){
+                            return xLetter;
+                        }else if(playerNum == 2){
+                            return oLetter;
+                        }
                     }
-                    if(four.textContent == player && five.textContent == player
-                       && six.textContent == player) {
-                        winningColors(4, 5, 6);
-                    }
-                    if(seven.textContent == player && eight.textContent == player
-                       && nine.textContent == player) {
-                        winningColors(7, 8, 9);
-                    }
-                    if(one.textContent == player && four.textContent == player
-                       && seven.textContent == player) {
-                       winningColors(1, 4, 7);
-                    }
-                    if(two.textContent == player && five.textContent == player
-                       && eight.textContent == player) {
-                        winningColors(2, 5, 8);
-                    }
-                    if(three.textContent == player && six.textContent == player
-                       && nine.textContent == player) {
-                      winningColors(3, 6, 9);
-                    }
-                    if(one.textContent == player && five.textContent == player
-                       && nine.textContent == player) {
-                       winningColors(1, 5, 9);
-                    }
-                    if(three.textContent == player && five.textContent == player
-                       && seven.textContent == player) {
-                       winningColors(3, 5, 7);
-                    }
+                }
+                
+                function checkWinner() {
+                                   var one = document.getElementById("1");
+                                   var two = document.getElementById("2");
+                                   var three = document.getElementById("3");
+                                   var four = document.getElementById("4");
+                                   var five = document.getElementById("5");
+                                   var six = document.getElementById("6");
+                                   var seven = document.getElementById("7");
+                                   var eight = document.getElementById("8");
+                                   var nine = document.getElementById("9");
+
+                                   if(one.textContent == player && two.textContent == player
+                                      && three.textContent == player) {
+                                       winningColors(1, 2, 3);
+                                   }
+                                   if(four.textContent == player && five.textContent == player
+                                      && six.textContent == player) {
+                                       winningColors(4, 5, 6);
+                                   }
+                                   if(seven.textContent == player && eight.textContent == player
+                                      && nine.textContent == player) {
+                                       winningColors(7, 8, 9);
+                                   }
+                                   if(one.textContent == player && four.textContent == player
+                                      && seven.textContent == player) {
+                                      winningColors(1, 4, 7);
+                                   }
+                                   if(two.textContent == player && five.textContent == player
+                                      && eight.textContent == player) {
+                                       winningColors(2, 5, 8);
+                                   }
+                                   if(three.textContent == player && six.textContent == player
+                                      && nine.textContent == player) {
+                                     winningColors(3, 6, 9);
+                                   }
+                                   if(one.textContent == player && five.textContent == player
+                                      && nine.textContent == player) {
+                                      winningColors(1, 5, 9);
+                                   }
+                                   if(three.textContent == player && five.textContent == player
+                                      && seven.textContent == player) {
+                                      winningColors(3, 5, 7);
+                                   }
+                                   if(one.textContent != "" && two.textContent != "" 
+                                           && three.textContent != "" && four.textContent != "" &&
+                                           five.textContent != "" && six.textContent != "" && 
+                                           seven.textContent != "" && eight.textContent != "" && nine.textContent != ""){
+                                       win.textContent = "It's a Tie!";
+                                           }
+
+                               }
+
+                               function winningColors(one, two, three) {
+                                   winner = true;
+                                   win.textContent = player + " won!";
+
+                                   var first = document.getElementById(one);
+                                   var second = document.getElementById(two);
+                                   var third = document.getElementById(three);
+
+                                   first.style.color = "red";
+                                   second.style.color = "red";
+                                   third.style.color = "red"; 
+                               }
+
+
+/*
+                function checkWinner() {
+                    checkThree("1", "2", "3");
+                    checkThree("4", "5", "6");
+                    checkThree("7", "8", "9");
+                    checkThree("1", "4", "7");
+                    checkThree("2", "5", "8");
+                    checkThree("3", "6", "9");
+                    checkThree("1", "5", "9");
+                    checkThree("3", "5", "7");
+                    
                     if(one.textContent != "" && two.textContent != "" 
                             && three.textContent != "" && four.textContent != "" &&
                             five.textContent != "" && six.textContent != "" && 
@@ -133,19 +211,32 @@
                             
                 }
                 
-                function winningColors(one, two, three) {
+                function checkThree(c1, c2, c3){
+                    var c1 = document.getElementById(c1);
+                    var c2 = document.getElementById(c2);
+                    var c3 = document.getElementById(c3);
+                    
+                    if(c1.textContent == c2.textContent && c2.textContent == c3.textContent
+                       && c3.textContent != "") {
+                       winningColors(c1, c2, c3);
+                    }
+                }
+                
+                function winningColors(c1, c2, c3) {
                     winner = true;
 
                     win.textContent = player + " won!";
                     
-                    var first = document.getElementById(one);
-                    var second = document.getElementById(two);
-                    var third = document.getElementById(three);
+                    var first = document.getElementById(c1);
+                    var second = document.getElementById(c2);
+                    var third = document.getElementById(c3);
                     
                     first.style.color = "red";
                     second.style.color = "red";
                     third.style.color = "red"; 
                 }
+*/
+                
             </script>
     </body>
 </html>
