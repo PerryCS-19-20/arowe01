@@ -73,3 +73,18 @@ canvas {
 td {
     border: solid black 1px;
 }
+
+.gallery {
+    width: 170px;
+    height: 170px;
+    border: solid 1px;
+    font-size: 80px;
+    text-align: center;
+
+}
+#gallery {
+    width: 500px;
+    margin: auto;
+    text-align: center;
+
+}        
