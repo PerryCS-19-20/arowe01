@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Times Table</title>
+        <style>
+            table, td, th {
+                border: solid 1px;
+            }
+            td {
+                text-align: right;
+            }
+            .thirdRow {
+                background-color: lightblue;
+            }
+        </style>
+    </head>
+     <body onload="buildTimesTable();">
+
+
+        <h1>Multiplication Table</h1>
+        Table Width:<input type="range" id="tableWidth" min="1" max="21" value="11" onchange ="buildTimesTable();"><br>
+        Table Height:<input type="range" id="tableHeight" min="1" max="101" value="11" onchange ="buildTimesTable();"><br>
+
+        <script>
+            function buildTimesTable() {
+                // Remove the multiplication table if it already exists.
+                var timesTable = document.getElementById("timesTable");
+                if (timesTable != null) {
+                    timesTable.parentNode.removeChild(timesTable);        
+                }
+
+
+                // Create a table for the multiplication table
+                timesTable = document.createElement("table");
+                timesTable.id = "timesTable";            
+                
+                // Add the table to the document's body
+                var body = document.body;
+                body.appendChild(timesTable);
+                
+                // Get the table width and height
+                var width = document.getElementById("tableWidth").value;
+                var height = document.getElementById("tableHeight").value;
+
+                // Fill in the multiplication table
+                for(var i=0; i <height; i++){
+                    var row = document.createElement("tr");
+                    timesTable.appendChild(row);
+                    for(var n=0; n<width; n++){
+                        if (i == 0) {
+                            var column = document.createElement("th");
+                            if(i == 0 && n == 0){
+                                column.textContent = "";
+                            } else {
+                                column.textContent = n;
+                            }
+                        } else {
+                            if(n == 0){
+                                var column = document.createElement("th");
+                                column.textContent = i;
+
+                            }else{
+                                var column = document.createElement("td");
+                                column.textContent = n*i; 
+                            }
+                        }
+                        if((n + 1) % 3 == 0 || (i + 1) % 3 == 0){
+                            column.className = "thirdRow";
+                        }
+                        row.appendChild(column);
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
