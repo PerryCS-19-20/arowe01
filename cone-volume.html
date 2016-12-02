@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cone Volume</title>
+        <style>
+            .fraction {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    
+    text-align: center;
+    
+    }
+.fraction > span { 
+    display: block; 
+    padding: 0.1em; 
+    }
+.fraction span.bot {border-top: thin solid black;}
+
+#v {
+    font-size: 40px;
+    vertical-align: middle;
+}
+h1 {
+    font-size: 35px;
+}
+input[type=number]{
+    width: 64px;
+}
+#coneCalcBox {
+    width: 400px;
+}
+#vol {
+    width: 80px;
+    font-size: 15px;
+}
+        </style>
+    </head>
+    <body>
+        <script>
+            function calc(){
+                var h = parseFloat(document.getElementById("height").value);
+                var r = parseFloat(document.getElementById("rad").value);
+                var vol = document.getElementById("vol");
+                
+                var area = Math.PI * r * r;                 //Calculate area of base
+                vol.value = (area * (h / 3)).toFixed(3);    //Show volume of cone to 3 decimal places
+            }
+        </script>
+        <div id="coneCalcBox">
+            <h1>Volume of a Cone</h1><br>
+            <img src="http://www.mathsteacher.com.au/year10/ch14_measurement/26_cone/Image5512.gif" 
+                 style="float: left; margin-right: 15px;">
+            <h2><span id="v">V</span> = &pi; r<sup>2</sup> <div class="fraction"><span>h</span><span class="bot">3</span></div></h2>
+            r: <input type="number" id="rad" placeholder="radius"><br>
+            h: <input type="number" id="height" placeholder="height">
+            <button onclick="calc();">Calculate</button>
+            <hr>
+            <span style="font-size: 20px;">v :</span> <input type="output" id="vol" placeholder="volume" readonly>
+        </div>
+    </body>
+</html>
