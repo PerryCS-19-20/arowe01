@@ -26,6 +26,7 @@ function buildMap(idName) {
     addListItem("Multiplication", "multi", "https://perryma.tk/arowe01/multiplication.html", "classProjectsList");
     addListItem("More Multiplication", "multi2", "https://perryma.tk/arowe01/multiplication2.html", "classProjectsList");
     addListItem("HTML Test", "htmlTest", "https://perryma.tk/arowe01/htmltest.html", "classProjectsList");
+    addListItem("Cone Volume", "coneVol", "https://perryma.tk/arowe01/cone-volume.html", "classProjectsList");
     
     
     
