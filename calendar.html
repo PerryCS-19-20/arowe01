@@ -4,6 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Calendar</title>
+        <style>
+            #calendar {
+                
+            }
+            .calendarButton {
+                padding: 10px;
+                font-weight: bold;
+            }
+        </style>
         <script>
             var today = new Date();
             var month = today.getMonth();
@@ -13,10 +22,16 @@
             function makeCalendar() {
                 var body = document.body;
                 
+                //build navigation buttons
+                makeButton("prevYear", prevYear, "<<");
+                makeButton("prevMonth", prevMonth, "<");
+                makeButton("nextMonth", nextMonth, ">");
+                makeButton("nextYear", nextYear, ">>");
+                
                 //build header
                 var header = document.createElement("h1");
                 header.id = "calendarHeader";
-                header.textContent = monthName + year;
+                header.textContent = monthName + " " + year;
                 body.appendChild(header);
                 
                 //build empty calendar
@@ -53,6 +68,27 @@
                         body.appendChild(row);
                     }
                 }
+            }
+            
+            function prevYear() {
+                year = year -1;
+            }
+            function prevMonth() {
+                month = month -1;
+                if (month < 0) {
+                    month = 11;
+                    year = year -1;
+                }
+            }
+            function nextMonth() {
+                month = month +1;
+                if (month > 11) {
+                    month = 0;
+                    year = year +1;
+                }
+            }
+            function nextYear() {
+                year = year +1;
             }
             
             function getNumDays(month, year) {
@@ -113,10 +149,19 @@
                 }
             }
 
-
+            function makeButton(name, functionName, look) {
+                var body= document.body;
+                var button = document.createElement("button");
+                button.textContent = look;
+                button.id = name;
+                button.className = "calendarButton";
+                body.appendChild(button);
+                button.onclick = functionName;
+            }
 
         </script>
     </head>
     <body onload="makeCalendar();">
+        
     </body>
 </html>
