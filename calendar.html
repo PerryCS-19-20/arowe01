@@ -17,10 +17,26 @@
             var today = new Date();
             var month = today.getMonth();
             var year = today.getFullYear();
-            var monthName = getMonthName(month);
+            
             
             function makeCalendar() {
                 var body = document.body;
+                
+                //remove calendar if it already exists
+                var calendarRemove = document.getElementById("calendar");
+                var headerRemove = document.getElementById("calendarHeader");
+                var prevYearRemove = document.getElementById("prevYear");
+                var prevMonthRemove = document.getElementById("prevMonth");
+                var nextMonthRemove = document.getElementById("nextMonth");
+                var nextYearRemove = document.getElementById("nextYear");
+                if (calendarRemove != null) {
+                    calendarRemove.parentNode.removeChild(calendarRemove); 
+                    headerRemove.parentNode.removeChild(headerRemove);
+                    prevYearRemove.parentNode.removeChild(prevYearRemove);
+                    prevMonthRemove.parentNode.removeChild(prevMonthRemove);
+                    nextMonthRemove.parentNode.removeChild(nextMonthRemove);
+                    nextYearRemove.parentNode.removeChild(nextYearRemove);
+                }
                 
                 //build navigation buttons
                 makeButton("prevYear", prevYear, "<<");
@@ -31,6 +47,7 @@
                 //build header
                 var header = document.createElement("h1");
                 header.id = "calendarHeader";
+                var monthName = getMonthName(month);
                 header.textContent = monthName + " " + year;
                 body.appendChild(header);
                 
@@ -42,7 +59,7 @@
                 //first row (days of the week)
                 var days = document.createElement("tr");
                 days.id = "days";
-                body.appendChild(days);
+                calendar.appendChild(days);
                 for (var i = 0; i < 7; i++) {
                     var dayHeader = document.createElement("th");
                     dayHeader.textContent = getDayName(i);
@@ -51,8 +68,8 @@
                 
                 //dates on the calendar
                 var row = document.createElement("tr");
-                body.appendChild(row);
-                for (var i = 0; i < getNumDays(month, year) + getFirstDay(month, year); i++) {
+                calendar.appendChild(row);
+                for (var i = 0; i < getNumDays(month, year) + getFirstDay(month, year) +1; i++) {
                     var cell = document.createElement("td");
                     var dateNum = i - getFirstDay(month, year);
                     if (dateNum > 0) {
@@ -65,13 +82,14 @@
                     //new week
                     if(i % 7 == 0) {
                         var row = document.createElement("tr");
-                        body.appendChild(row);
+                        calendar.appendChild(row);
                     }
                 }
             }
             
             function prevYear() {
                 year = year -1;
+                makeCalendar();
             }
             function prevMonth() {
                 month = month -1;
@@ -79,6 +97,7 @@
                     month = 11;
                     year = year -1;
                 }
+                makeCalendar()
             }
             function nextMonth() {
                 month = month +1;
@@ -86,9 +105,11 @@
                     month = 0;
                     year = year +1;
                 }
+                makeCalendar()
             }
             function nextYear() {
                 year = year +1;
+                makeCalendar()
             }
             
             function getNumDays(month, year) {
