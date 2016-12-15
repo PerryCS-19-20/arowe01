@@ -36,7 +36,8 @@ input[type=number]{
 }
         </style>
     </head>
-    <body>
+    <body onload="buildMap('menubar');">
+        <div id="menubar"></div>
         <script>
             function calc(){
                 var h = parseFloat(document.getElementById("height").value);
