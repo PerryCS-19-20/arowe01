@@ -23,7 +23,6 @@ body {
 
 /* top-level menu as a bar across page */
 #menubar > ul > li {
-	text-align: center;
         display: inline-block;
         padding: 8px;
 }
@@ -52,6 +51,7 @@ body {
 /* Make menu links look normal */
 #menubar a {
 	display: block;
+	text-align: center;
         color: lavenderblush;
 	padding: 8px;
 	text-decoration: none;
