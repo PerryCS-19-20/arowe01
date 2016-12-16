@@ -7,8 +7,20 @@
         <link rel="stylesheet" type="text/css" href="menu.css">
         
         <style>
-            #calendarBody {
-            margin: auto;
+            body {
+                text-align: center;
+            }
+            body > table {
+                margin: auto;
+            }
+           
+            button {
+                text-align: center;
+                padding: 20px;
+                margin: auto;
+                color: white;
+                background-color: pink;
+                width: 50px;
             }
             
             .calendarButton {
@@ -16,16 +28,27 @@
                 font-weight: bold;
             }
             td {
+                text-align: left;
+                padding: 5px;
+                background-color:#ffe4e4;
                 border: solid 1px;
                 width: 80px;
                 height: 80px;
+                border-color: pink;
+                color: brown;
             }
+            
+            th {
+                color: brown;
+                font-family: sans-serif;
+            }
+            
             #calendarHeader {
                 font-size: 40px;
+                color: pink;
+                font-family: cursive;
             }
-            #calender {
-                background-color: lightblue;
-            }
+            
         </style>
         <script src="sitemap.js"></script>
         <script>
@@ -91,6 +114,7 @@
                         cell.textContent = dateNum;
                     }else{
                         cell.style.border = "0";
+                        cell.style.backgroundColor = "white";
                     }
                     row.appendChild(cell);
                     
