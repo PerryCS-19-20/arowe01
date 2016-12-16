@@ -5,6 +5,7 @@ body {
 
 /* div or span that contains the menu list */
 #menubar {
+	text-align: center;
 	position: relative;
 	padding: 0px;
 	display: block;
@@ -51,7 +52,6 @@ body {
 /* Make menu links look normal */
 #menubar a {
 	display: block;
-	text-align: center;
         color: lavenderblush;
 	padding: 8px;
 	text-decoration: none;
