@@ -6,36 +6,47 @@
         <link rel="stylesheet" type="text/css" href="menu.css">
         <style>
             .fraction {
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    
-    text-align: center;
-    
-    }
-.fraction > span { 
-    display: block; 
-    padding: 0.1em; 
-    }
-.fraction span.bot {border-top: thin solid black;}
+                display: inline-block;
+                
+                vertical-align: middle;
 
-#v {
-    font-size: 40px;
-    vertical-align: middle;
-}
-h1 {
-    font-size: 35px;
-}
-input[type=number]{
-    width: 64px;
-}
-#coneCalcBox {
-    width: 400px;
-}
-#vol {
-    width: 80px;
-    font-size: 15px;
-}
+                text-align: center;
+
+                }
+            .fraction > span { 
+                display: block; 
+                padding: 0.1em; 
+                }
+            .fraction span.bot {border-top: thin solid black;}
+            #v {
+                font-size: 40px;
+                vertical-align: middle;
+            }
+            h1 {
+                font-size: 35px;
+                text-align: center;
+                font-family: cursive;
+                color: pink;
+            }
+            input[type=number]{
+                width: 64px;
+                
+            }
+            #coneCalcBox {
+                width: 400px;
+                margin: auto;
+            }
+            #vol {
+                width: 80px;
+                font-size: 15px;
+            }
+            button {
+                color: white;
+                background-color: pink;
+            }
+            h2 {
+                color: brown;
+            }
         </style>
     </head>
     <body onload="buildMap('menubar');">
