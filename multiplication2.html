@@ -6,6 +6,21 @@
         <link rel="stylesheet" type="text/css" href="menu.css">
         <title>Times Table</title>
         <style>
+            h1 {
+                text-align: center;
+                font-family: cursive;
+                color: pink;
+            }
+            body > table {
+                margin: auto;
+            }
+            
+            .sliders {
+                text-align: center;
+                margin: auto;
+                padding: 5px;
+            }
+            
             table, td, th {
                 border: solid 1px;
             }
@@ -13,7 +28,7 @@
                 text-align: right;
             }
             .thirdRow {
-                background-color: lightblue;
+                background-color: lightpink;
             }
         </style>
         <script src="sitemap.js"></script>
@@ -21,11 +36,13 @@
      <body onload="buildMap('menubar'); buildTimesTable();">
         <div id="menubar"></div>
 
-
+        
         <h1>Multiplication Table</h1>
+        <div class="sliders">
         Table Width:<input type="range" id="tableWidth" min="1" max="21" value="11" onchange ="buildTimesTable();"><br>
         Table Height:<input type="range" id="tableHeight" min="1" max="101" value="11" onchange ="buildTimesTable();"><br>
-
+        </div>
+        
         <script>
             function buildTimesTable() {
                 // Remove the multiplication table if it already exists.
@@ -33,8 +50,6 @@
                 if (timesTable != null) {
                     timesTable.parentNode.removeChild(timesTable);        
                 }
-
-
                 // Create a table for the multiplication table
                 timesTable = document.createElement("table");
                 timesTable.id = "timesTable";            
@@ -46,7 +61,6 @@
                 // Get the table width and height
                 var width = document.getElementById("tableWidth").value;
                 var height = document.getElementById("tableHeight").value;
-
                 // Fill in the multiplication table
                 for(var i=0; i <height; i++){
                     var row = document.createElement("tr");
@@ -63,7 +77,6 @@
                             if(n == 0){
                                 var column = document.createElement("th");
                                 column.textContent = i;
-
                             }else{
                                 var column = document.createElement("td");
                                 column.textContent = n*i; 
