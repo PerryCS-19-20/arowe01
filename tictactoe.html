@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Tic-Tac-Toe</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="sitemap.js"></script>
         <link rel="stylesheet" type="text/css" href="menu.css">
@@ -12,20 +12,24 @@
             width: 100px;
             height: 100px;
             border: solid 1px;
-            font-size: 80px;
+            font-size: 70px;
             text-align: center;
             
         }
         h1 {
             font-size: 70px;
+            color: pink;
+            font-family: cursive;
         }
         #tictactoe {
             width: 500px;
             margin: auto;
             text-align: center;
+            color: brown;
             
         }
         #board {
+            
             margin: auto;
             font-family: "Geholiday";
         }
@@ -35,6 +39,7 @@
             margin: auto;
             font-size: 20px;
             border: solid 1px;
+            border-color: brown;
         }
         @font-face {
             font-family: "Geholiday";
@@ -139,7 +144,6 @@
                                    var seven = document.getElementById("7");
                                    var eight = document.getElementById("8");
                                    var nine = document.getElementById("9");
-
                                    if(one.textContent == player && two.textContent == player
                                       && three.textContent == player) {
                                        winningColors(1, 2, 3);
@@ -178,23 +182,17 @@
                                            seven.textContent != "" && eight.textContent != "" && nine.textContent != ""){
                                        win.textContent = "It's a Tie!";
                                            }
-
                                }
-
                                function winningColors(one, two, three) {
                                    winner = true;
                                    win.textContent = player + " won!";
-
                                    var first = document.getElementById(one);
                                    var second = document.getElementById(two);
                                    var third = document.getElementById(three);
-
-                                   first.style.color = "red";
-                                   second.style.color = "red";
-                                   third.style.color = "red"; 
+                                   first.style.color = "pink";
+                                   second.style.color = "pink";
+                                   third.style.color = "pink"; 
                                }
-
-
 /*
                 function checkWinner() {
                     checkThree("1", "2", "3");
@@ -228,7 +226,6 @@
                 
                 function winningColors(c1, c2, c3) {
                     winner = true;
-
                     win.textContent = player + " won!";
                     
                     var first = document.getElementById(c1);
