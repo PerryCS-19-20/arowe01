@@ -6,6 +6,10 @@
         <title>Times Table</title>
         <link rel="stylesheet" type="text/css" href="menu.css">
         <style>
+            body > table {
+                margin: auto;
+                margin-top: 50px;
+            }
             table, td, th {
                 border: solid 1px;
             }
@@ -13,7 +17,7 @@
                 text-align: right;
             }
             .thirdRow {
-                background-color: lightblue;
+                background-color: lightpink;
             }
         </style>
         <script src="sitemap.js"></script>
@@ -49,7 +53,6 @@
                             if(n == 0){
                                 var column = document.createElement("th");
                                 column.textContent = i;
-
                             }else{
                                 var column = document.createElement("td");
                                 column.textContent = n*i; 
